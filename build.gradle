@@ -1,0 +1,53 @@
+apply plugin: 'java-library'
+apply plugin: 'maven-publish'
+
+group = "kayseven"
+version = "1.0.0"
+
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+
+dependencies {
+    compileOnly files('libs/beansbinding-1.2.1.jar')
+}
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    // Use jcenter for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+}
+
+task javadocJar (type: Jar, dependsOn: javadoc) { // (1)
+    classifier = "javadoc"
+    from javadoc.destinationDir
+}
+
+task sourceJar (type: Jar) {
+    classifier = "sources"
+    from sourceSets.main.allSource
+}
+
+publishing {
+    publications {
+        myPublication(MavenPublication) {
+            from components.java
+
+            artifact (javadocJar) { 
+                classifier = 'javadoc'
+            }
+
+            artifact (sourceJar) { 
+                classifier = 'sources'
+            }
+
+        }
+    }
+
+    repositories {
+        maven {
+            url "file:/${project.projectDir}/artifacts"
+        }
+    }
+}
+

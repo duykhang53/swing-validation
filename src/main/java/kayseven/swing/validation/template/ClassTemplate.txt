@@ -1,0 +1,18 @@
+  public static class %2$sValidator extends kayseven.swing.validation.EntityValidator {
+    @Override
+    protected kayseven.swing.validation.validator.ValidatorBase[] createValidators() {
+      return new kayseven.swing.validation.validator.ValidatorBase[] { 
+%4$s      };
+    }
+
+    @Override
+    public String getFieldName() {
+      return "%1$s";
+    }
+
+    @Override
+    protected Class getValidatingClass() {
+      return %3$s.class;
+    }
+  }
+

@@ -1,0 +1,4 @@
+  public %1$s get%2$sValidator() {
+    return new %2$sValidator();
+  }
+

@@ -1,0 +1,38 @@
+  private final java.util.Map<String, %7$s> validatorMap;
+
+  @SuppressWarnings("OverridableMethodCallInConstructor")
+  public %1$sValidation() {
+    validatorMap = new java.util.HashMap<String, %7$s>();
+
+%3$s  }
+
+  @Override
+  public java.util.Set<String> allFieldNames() {
+    return validatorMap.keySet();
+  }
+
+  @Override
+  public %7$s getValidator(String fieldName) {
+    return validatorMap.get(fieldName);
+  }
+
+  @Override
+  public void applyValidator(%4$s bindingGroup) {
+    applyValidator(bindingGroup, new %6$s() {
+      @Override
+      public %5$s findBinding(%4$s bindingGroup, String fieldName) {
+        return bindingGroup.getBinding(fieldName);
+      }
+    });
+  }
+
+  @Override
+  public void applyValidator(%4$s bindingGroup, %6$s finder) {
+    for (String fieldName : allFieldNames()) {
+        %5$s binding = finder.findBinding(bindingGroup, fieldName);
+
+        if (binding != null) {
+            binding.setValidator(getValidator(fieldName));
+        }
+    }
+  }
